@@ -1,3 +1,5 @@
+# Run: ./scripts/fix-port-and-start.sh  (or docker compose up -d --build)
+# App: http://localhost:2020
 services:
   frontend:
     build: .
