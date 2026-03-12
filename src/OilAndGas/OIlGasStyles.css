@@ -1,0 +1,193 @@
+/* ===================== LAYOUT ===================== */
+.sidebar-charts {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    min-width: 280px;
+    height: 100%;
+    background: #1c1c1e;
+    border-right: 1px solid #333;
+    overflow: hidden;
+}
+
+.sidebar-charts-2d {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 4px;
+}
+
+.sidebar-charts-3d {
+    width: 100%;
+    height: 200px;
+    min-height: 200px;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#main-charts {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 4px;
+    gap: 2px;
+}
+
+/* ===================== SIDEBAR 2D TITLE ===================== */
+.sidebar-charts-2d-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4px 2px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 4px;
+}
+
+.sidebar-charts-2d-title-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+}
+
+.sidebar-charts-2d-title {
+    font-weight: bold;
+    font-size: 11px;
+    color: #ccc;
+}
+
+.sidebar-charts-2d-line {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    font-size: 9px;
+    color: #aaa;
+}
+
+/* ===================== GRID CONTAINER ===================== */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    flex: 1;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.sidebar-charts-2d-item {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+.sidebar-charts-2d-item-small {
+    flex: 1;
+}
+
+/* ===================== MAIN CHART CONTAINERS ===================== */
+.chart-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.chart-root {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.legend-root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ===================== SHALE BACKGROUND ===================== */
+#shale-chart-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+/* ===================== LEGEND ===================== */
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px;
+    font-size: 10px;
+    background: rgba(28, 28, 30, 0.85);
+    border-radius: 4px;
+    margin: 4px;
+}
+
+.legend-color-item {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.color-label {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+.legend-text-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #ccc;
+}
+
+/* ===================== SCICHART LEGEND OVERRIDES ===================== */
+.scichart__legend-line {
+    display: block;
+    width: 100%;
+    margin: 2px 0;
+}
+
+.scichart__legend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 0;
+    font-size: 10px;
+}
+
+.scichart__legend-item-simple {
+    justify-content: space-between;
+}
+
+.scichart__legend-item-justify {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 9px;
+}
