@@ -53,7 +53,7 @@ function App() {
                     <div style={dotStyle('#FF5F57')} />
                     <div style={dotStyle('#FFBD2E')} />
                     <div style={dotStyle('#28C840')} />
-                    <span style={titleStyle}>Oil &amp; Gas Dashboard</span>
+                    <span style={titleStyle}>oil-gas</span>
                 </div>
                 <OilAndGasDashboardShowcase />
             </div>
