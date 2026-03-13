@@ -2,7 +2,7 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --only=production=false
+RUN npm install
 COPY . .
 ENV CI=false
 RUN npm run build
