@@ -45,9 +45,8 @@ type ActivityRow = {
     wifi: string;
 };
 
-const generateActivityRows = (): ActivityRow[] => {
+const generateActivityRows = (now: Date): ActivityRow[] => {
     const rows: ActivityRow[] = [];
-    const now = new Date();
     const wifiSamples = [-48, -31, -29, -37, -36, -34, -41, -32, -37, -30];
 
     for (let i = 0; i < 200; i++) {
@@ -78,16 +77,41 @@ const generateActivityRows = (): ActivityRow[] => {
 };
 
 const GasSentinelDashboard: React.FC = () => {
-    const [activityRows, setActivityRows] = React.useState<ActivityRow[]>(() => generateActivityRows());
+    const pageSize = 20;
+    const [allActivityRows, setAllActivityRows] = React.useState<ActivityRow[]>(() =>
+        generateActivityRows(new Date())
+    );
+    const [pageIndex, setPageIndex] = React.useState(0);
+    const [isActivityFading, setIsActivityFading] = React.useState(false);
 
     React.useEffect(() => {
-        const id = window.setInterval(() => {
-            setActivityRows(generateActivityRows());
-        }, 5000);
-        return () => window.clearInterval(id);
+        let fadeTimeout: number | undefined;
+        const intervalId = window.setInterval(() => {
+            // Fade out current page
+            setIsActivityFading(true);
+            if (fadeTimeout) window.clearTimeout(fadeTimeout);
+
+            // Swap page after a short delay and fade in
+            fadeTimeout = window.setTimeout(() => {
+                const nextRows = generateActivityRows(new Date());
+                setAllActivityRows(nextRows);
+                setPageIndex((prev) => {
+                    const pageCount = Math.max(1, Math.ceil(nextRows.length / pageSize));
+                    return (prev + 1) % pageCount;
+                });
+                setIsActivityFading(false);
+            }, 220);
+        }, 3000);
+
+        return () => {
+            window.clearInterval(intervalId);
+            if (fadeTimeout) window.clearTimeout(fadeTimeout);
+        };
     }, []);
 
-    const lastUpdate = activityRows.length > 0 ? activityRows[0].timestamp : '—';
+    const start = pageIndex * pageSize;
+    const visibleActivityRows = allActivityRows.slice(start, start + pageSize);
+    const lastUpdate = allActivityRows.length > 0 ? allActivityRows[0].timestamp : '—';
 
     return (
         <div className="gs-page">
@@ -149,7 +173,7 @@ const GasSentinelDashboard: React.FC = () => {
 
             <section className="gs-activity">
                 <div className="gs-activity-title">RECENT ACTIVITY LOG</div>
-                <div className="gs-activity-table-wrapper">
+                <div className={`gs-activity-table-wrapper ${isActivityFading ? 'gs-fade-out' : 'gs-fade-in'}`}>
                     <table className="gs-activity-table">
                         <thead>
                             <tr>
@@ -163,7 +187,7 @@ const GasSentinelDashboard: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {activityRows.map((row, idx) => (
+                            {visibleActivityRows.map((row, idx) => (
                                 <tr key={idx}>
                                     <td>{row.timestamp}</td>
                                     <td>{row.device}</td>

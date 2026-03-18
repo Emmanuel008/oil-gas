@@ -160,6 +160,15 @@
   border-radius: 6px;
   border: 1px solid #111827;
   overflow: hidden;
+  transition: opacity 220ms ease;
+}
+
+.gs-fade-out {
+  opacity: 0;
+}
+
+.gs-fade-in {
+  opacity: 1;
 }
 
 .gs-activity-table {
